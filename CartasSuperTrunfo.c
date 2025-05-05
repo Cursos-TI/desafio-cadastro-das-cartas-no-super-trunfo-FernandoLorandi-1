@@ -8,10 +8,20 @@ typedef struct {
     char nomeCidade[50];
     float populacao;
     float area;
-    float PIB;
+    float pib;
     int pontosTuristicos;
 
 } CartaSuperTrunfo;
+
+//Função para calcular a densidade populacional;
+float densidadePopulacional(float populacao, float area) {
+    return populacao / area;
+}
+
+//Função para calcular o Pib per Capito;
+float pibPerCapita(float pib, float populacao) {
+    return pib / populacao;
+}
 
 //Função de inserção de dados, recebe a referência da struct para de cartas e a posição dos dados no array;
 int cadastroDeCartas(CartaSuperTrunfo cartas[], int i) {
@@ -28,9 +38,10 @@ int cadastroDeCartas(CartaSuperTrunfo cartas[], int i) {
     printf("Informe a área (em Km²): ");
     scanf("%f", &cartas[i].area);
     printf("Informe o PIB: ");
-    scanf("%f", &cartas[i].PIB);
+    scanf("%f", &cartas[i].pib);
     printf("Informe o número de pontos turísticos: ");
     scanf("%d", &cartas[i].pontosTuristicos);
+
 
     return 0;
 }
@@ -43,12 +54,18 @@ int impressaoDeCartas(CartaSuperTrunfo cartas[], int i) {
     printf("Cidade: %s\n", cartas[i].nomeCidade);
     printf("População: %.2f habitantes\n", cartas[i].populacao);
     printf("Área: %.2f Km²\n", cartas[i].area);
-    printf("PIB: %.2f bilhões de reais \n", cartas[i].PIB);
+    printf("PIB: %.2f bilhões de reais \n", cartas[i].pib);
     printf("Número de pontos turísticos: %d\n", cartas[i].pontosTuristicos);
 
+    float densidade = densidadePopulacional(cartas[i].populacao, cartas[i].area);
+    printf("Densidade populacional: %.2f habitantes por Km²\n", densidade);
+
+    double perCapita = pibPerCapita(cartas[i].pib, cartas[i].populacao);
+    printf("PIB per Capita: %.2f reais\n", perCapita);
 
     return 0;
 }
+
 
 int main() {
     //Chama a struck e passa 3 arrays.
